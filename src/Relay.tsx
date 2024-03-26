@@ -8,7 +8,10 @@ const Relay = () => {
   const [message, setMessage] = useState("");
   const [isFirstWord, setIsFirstWord] = useState(true);
   const [definition, setDefinition] = useState("");
+  const [pos, setPos] = useState(""); // 단어의 품사를 저장하는 상태
+  const [word, setWord] = useState(""); // 단어를 저장하는 상태
   const [showToast, setShowToast] = useState(false);
+  const [prevDefinition, setPrevDefinition] = useState(""); // 이전 올바른 단어의 뜻을 저장하기 위한 상태
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentWord(e.target.value);
@@ -52,8 +55,13 @@ const Relay = () => {
 
         if (senseNode) {
           const definitionNode = senseNode.querySelector("definition");
-          if (definitionNode) {
+          const posNode = xmlDoc.querySelector("pos");
+          const wordNode = xmlDoc.querySelector("word");
+          
+          if (definitionNode && posNode && wordNode) {
             setDefinition(definitionNode.textContent || "");
+            setPos(posNode.textContent || "");
+            setWord(wordNode.textContent || "");
           }
         } else {
           setMessage("올바른 단어를 입력하세요!");
@@ -66,13 +74,16 @@ const Relay = () => {
           setCurrentWord("");
           setMessage("");
           setIsFirstWord(false);
+          setPrevDefinition(definition); // 올바른 단어일 경우 현재 뜻을 이전 뜻으로 저장합니다.
         } else {
           setMessage("올바른 단어를 입력하세요!");
           setShowToast(true);
+          setDefinition(""); // 이전 단어가 맞지 않으면 뜻을 초기화합니다.
         }
       } else {
         setMessage("유효하지 않는 단어입니다!");
         setShowToast(true);
+        setDefinition(""); // 유효하지 않은 단어일 경우 뜻을 초기화합니다.
       }
     } catch (error) {
       console.error("API 호출 중 에러 발생:", error);
@@ -87,7 +98,13 @@ const Relay = () => {
           <p id="previousWord">{previousWord}</p>
         </div>
       </div>
-      {definition && <p className="definition">{definition}</p>}
+      {(isFirstWord || definition) && (
+        <div>
+          <p className="definition">{isFirstWord ? prevDefinition : definition}</p>
+          <p>품사: {pos}</p>
+          <p>단어: {word}</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
