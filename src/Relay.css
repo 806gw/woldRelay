@@ -1,5 +1,95 @@
-.All {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #4DB44D, #47A646);
+.word-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px; /* 적절한 여백을 추가합니다. */
+  box-sizing: border-box; /* padding 값이 width와 height에 포함되도록 box-sizing을 설정합니다. */
+}
+
+.previousWord {
+  width: 700px;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #d8ab53;
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#previousWord {
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+.prev-quality {
+  width: 650px;
+  height: 120px;
+  border-radius: 10px;
+  margin: auto;
+  background-color: #3d3216;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#woldInput {
+  width: 700px;
+  height: 50px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.definition {
+    width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #232323;
+    color: #fff;
+    margin: auto;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  animation: slideIn 0.5s ease forwards, fadeOut 1s ease 1s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

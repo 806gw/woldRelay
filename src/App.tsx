@@ -6,7 +6,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
+      <Routes>  
         <Route path='/' element={<Relay />}/>
       </Routes>
     </BrowserRouter>
