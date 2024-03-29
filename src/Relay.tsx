@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
-import "/src/Relay.css";
+import "./Relay.css";
 
 const Relay = () => {
   const [currentWord, setCurrentWord] = useState("");
@@ -12,7 +12,7 @@ const Relay = () => {
   const [word, setWord] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [prevDefinition, setPrevDefinition] = useState("");
-  const [trimmedDefinition, setTrimmedDefinition] = useState(""); // 일정 길이 이상일 경우 줄여진 뜻을 저장하는 상태
+  const [trimmedDefinition, setTrimmedDefinition] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentWord(e.target.value);
@@ -28,7 +28,7 @@ const Relay = () => {
   }, [showToast]);
 
   useEffect(() => {
-    const maxLength = 20; // 최대 길이
+    const maxLength = 20;
     if (definition.length > maxLength) {
       setTrimmedDefinition(definition.slice(0, maxLength) + "...");
     } else {
